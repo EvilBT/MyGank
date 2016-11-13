@@ -1,0 +1,37 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.2'
+        classpath 'me.tatarka:gradle-retrolambda:3.2.5'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath ('com.tencent.tinker:tinker-patch-gradle-plugin:1.7.3')
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+ext {
+    supportLibraryVersion = '25.0.0'
+    ageraVersion = '1.2.0-beta3'
+    frescoVersion = '0.14.1'
+    compileSdkVersion = 25
+    buildToolsVersion = "25.0.0"
+    daggerVersion = '2.7'
+    leakcanaryVersion = '1.5'
+}
