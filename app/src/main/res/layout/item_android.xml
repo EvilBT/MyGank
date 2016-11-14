@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+    android:layout_margin="@dimen/dp_10"
+              xmlns:tools="http://schemas.android.com/tools">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sd_image"
+        android:layout_margin="@dimen/dp_4"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_72"/>
+    <TextView
+        android:id="@+id/title"
+        tools:text="独立全端开发的开源小作：简诗 2.0"
+        style="@style/Base.TextAppearance.AppCompat.Title"
+        android:maxLines="1"
+        android:layout_margin="@dimen/dp_14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        tools:text="wingjay"
+        style="@style/Base.TextAppearance.AppCompat.Body1"
+        android:id="@+id/user"
+        android:layout_margin="@dimen/dp_14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

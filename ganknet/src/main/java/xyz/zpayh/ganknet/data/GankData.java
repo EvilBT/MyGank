@@ -1,5 +1,7 @@
 package xyz.zpayh.ganknet.data;
 
+import java.util.List;
+
 /**
  * 文 件 名: GankData
  * 创 建 人: 陈志鹏
@@ -26,6 +28,7 @@ public class GankData {
     private String _id;
     private String createdAt;
     private String desc;
+    private List<String> images;
     private String publishedAt;
     private String source;
     private String type;
@@ -55,6 +58,14 @@ public class GankData {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
     }
 
     public String getPublishedAt() {

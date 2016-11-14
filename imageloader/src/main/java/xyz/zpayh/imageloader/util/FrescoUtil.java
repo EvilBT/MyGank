@@ -114,6 +114,37 @@ public class FrescoUtil {
                 .build());
     }
 
+    public static void setResizeImage(@NonNull final SimpleDraweeView view, @NonNull final String path,
+                                      final int viewWidth){
+        Preconditions.checkNotNull(view);
+        Preconditions.checkNotNull(path);
+
+        ControllerListener<ImageInfo> controllerListener = new BaseControllerListener<ImageInfo>(){
+            @Override
+            public void onFinalImageSet(String id, ImageInfo imageInfo, Animatable animatable) {
+                if (imageInfo == null){
+                    return;
+                }
+                final float width = imageInfo.getWidth();
+                final float height = imageInfo.getHeight();
+                if (width * height != 0.0f) {
+                    final int viewHeight = (int) (height * viewWidth / width);
+                    setResizeImage(view,path,new ResizeOptions(viewWidth,viewHeight));
+                }
+            }
+        };
+
+        ImageRequest request = ImageRequestBuilder
+                .newBuilderWithSource(Uri.parse(path))
+                .build();
+
+        view.setController(Fresco.newDraweeControllerBuilder()
+                .setImageRequest(request)
+                .setOldController(view.getController())
+                .setControllerListener(controllerListener)
+                .build());
+    }
+
     public static void resizeImage(@NonNull SimpleDraweeView view, @NonNull String url,  int width, int height){
         com.facebook.common.internal.Preconditions.checkNotNull(view);
         com.facebook.common.internal.Preconditions.checkNotNull(url);
