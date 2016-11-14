@@ -1,1 +1,1 @@
-include ':app', ':library', ':imageloader'
+include ':app', ':library', ':imageloader', ':ganknet'

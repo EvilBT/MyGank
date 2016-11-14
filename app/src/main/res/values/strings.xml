@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">MyGank</string>
+
+    <string name="girl">姑娘</string>
+    <string name="technology">科技</string>
+    <string name="sport">体育</string>
+    <string name="joke">笑话</string>
+    <string name="today">今天</string>
+    <string name="android">Android</string>
+    <string name="ios">iOS</string>
+    <string name="web">前端</string>
+    <string name="extension">扩展阅读</string>
+
 </resources>

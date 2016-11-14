@@ -43,7 +43,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.0.0'
     testCompile 'junit:junit:4.12'
 
-    compile project(':library')
+    compile project(':ganknet')
     compile project(':imageloader')
 
     //可选，用于生成application类
@@ -230,9 +230,7 @@ if (buildWithTinker()) {
              */
             loader = ["com.tencent.tinker.loader.*",
                       //warning, you must change it with your application
-                      "tinker.sample.android.app.SampleApplication",
-                      //use sample, let BaseBuildInfo unchangeable with tinker
-                      "tinker.sample.android.app.BaseBuildInfo"
+                      "xyz.zpayh.mygank.GankApplicationTemp"
             ]
         }
 
