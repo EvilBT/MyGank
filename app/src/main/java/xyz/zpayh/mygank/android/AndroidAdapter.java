@@ -33,7 +33,7 @@ public class AndroidAdapter extends BaseQuickAdapter<GankData,BaseViewHolder> {
     @Override
     protected void convert(BaseViewHolder helper, GankData gankData) {
         List<String> images = gankData.getImages();
-        if (!images.isEmpty()){
+        if (images != null && !images.isEmpty()){
             SimpleDraweeView view = helper.getView(R.id.sd_image);
             view.setVisibility(View.VISIBLE);
             FrescoUtil.setResizeImage(view,images.get(0),mViewWidth);

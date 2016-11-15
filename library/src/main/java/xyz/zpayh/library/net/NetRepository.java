@@ -3,6 +3,8 @@ package xyz.zpayh.library.net;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.socks.library.KLog;
 
 import java.io.File;
@@ -61,7 +63,7 @@ public class NetRepository {
         //addPublicQueryParameter(builder);
 
         // 设置超时重连
-        builder.connectTimeout(20, TimeUnit.SECONDS)
+        builder//.connectTimeout(20, TimeUnit.SECONDS)
                 .readTimeout(20, TimeUnit.SECONDS)
                 .writeTimeout(20, TimeUnit.SECONDS);
 
@@ -70,11 +72,16 @@ public class NetRepository {
 
         mOkHttpClient = builder.build();
 
+        // String dateString = "2016-11-08T12:16:59.309Z";
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                .create();
+
         mRetrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addCallAdapterFactory(AgeraCallAdapterFactory.create())
                 .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(mOkHttpClient)
                 .build();
     }

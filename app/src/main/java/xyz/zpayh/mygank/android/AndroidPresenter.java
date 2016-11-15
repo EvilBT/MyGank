@@ -60,6 +60,8 @@ public class AndroidPresenter implements AndroidContract.Presenter, Updatable{
                 .orEnd(Result::failure)
                 .thenTransform(input -> Result.absentIfNull(input.getResults()))
                 .compile();
+
+        mRepository.addUpdatable(this);
     }
 
     @Override

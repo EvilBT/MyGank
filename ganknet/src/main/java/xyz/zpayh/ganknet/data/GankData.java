@@ -1,5 +1,6 @@
 package xyz.zpayh.ganknet.data;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,10 +27,10 @@ public class GankData {
      */
 
     private String _id;
-    private String createdAt;
+    private Date createdAt;
     private String desc;
     private List<String> images;
-    private String publishedAt;
+    private Date publishedAt;
     private String source;
     private String type;
     private String url;
@@ -44,11 +45,11 @@ public class GankData {
         this._id = _id;
     }
 
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -68,11 +69,11 @@ public class GankData {
         this.images = images;
     }
 
-    public String getPublishedAt() {
+    public Date getPublishedAt() {
         return publishedAt;
     }
 
-    public void setPublishedAt(String publishedAt) {
+    public void setPublishedAt(Date publishedAt) {
         this.publishedAt = publishedAt;
     }
 
