@@ -111,6 +111,7 @@ public class FrescoUtil {
         view.setController(Fresco.newDraweeControllerBuilder()
                 .setImageRequest(request)
                 .setOldController(view.getController())
+                .setAutoPlayAnimations(true)
                 .build());
     }
 

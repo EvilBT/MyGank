@@ -77,20 +77,22 @@ public class GirlFragment extends BaseFragment implements GirlContract.View{
         mRefreshList.setColorSchemeResources(R.color.colorAccent,R.color.colorPrimary);
         mList = findView(R.id.rv_list);
         mList.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+
+        mAdapter = new GirlAdapter(ScreenUtils.getScreenSize(getContext())[0]/2);
+        mAdapter.openLoadMore(10);
+        mList.setAdapter(mAdapter);
     }
 
     @Override
     protected void initListener() {
         mRefreshList.setOnRefreshListener(()->mPresenter.loadGirls(1,10));
+        mAdapter.setOnLoadMoreListener(()->
+                mPresenter.loadMore(mAdapter.getItemCount()/10+1,10));
     }
 
     @Override
     protected void initData() {
-        mAdapter = new GirlAdapter(ScreenUtils.getScreenSize(getContext())[0]/2);
-        mAdapter.openLoadMore(10);
-        mAdapter.setOnLoadMoreListener(()->
-            mPresenter.loadMore(mAdapter.getItemCount()/10+1,10));
-        mList.setAdapter(mAdapter);
+
     }
 
     //=====================View==================

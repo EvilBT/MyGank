@@ -60,6 +60,8 @@ dependencies {
     compile 'com.github.EvilBT:AgeraBus:v1.0.1'
     compile 'com.github.EvilBT:AgeraBinding:v0.2'
 
+    compile 'com.wx.goodview:goodview:1.0.0'
+
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.5.0'
 
     compile "com.google.dagger:dagger:$rootProject.ext.daggerVersion"

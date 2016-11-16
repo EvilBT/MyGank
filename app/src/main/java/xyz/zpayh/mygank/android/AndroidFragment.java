@@ -7,13 +7,17 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.socks.library.KLog;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
+import xyz.zpayh.bus.AgeraBus;
 import xyz.zpayh.ganknet.data.GankData;
 import xyz.zpayh.library.util.ScreenUtils;
 import xyz.zpayh.mygank.BaseFragment;
@@ -72,6 +76,15 @@ public class AndroidFragment extends BaseFragment implements AndroidContract.Vie
     @Override
     protected void initListener() {
         mRefreshList.setOnRefreshListener(()->mPresenter.loadAndroid(1,10));
+
+        mList.addOnItemTouchListener(new OnItemClickListener() {
+            @Override
+            public void SimpleOnItemClick(BaseQuickAdapter baseQuickAdapter, View view, int position) {
+                final GankData data = mAdapter.getItem(position);
+                AgeraBus.getDefault()
+                        .post(data);
+            }
+        });
     }
 
     @Override

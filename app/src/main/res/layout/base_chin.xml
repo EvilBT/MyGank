@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_chin"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        tools:text="Sherlock"
+        style="@style/Base.TextAppearance.AppCompat.Body1"
+        android:id="@+id/author"
+        android:layout_margin="@dimen/dp_10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/time"
+        tools:text="2016/10"
+        style="@style/Base.TextAppearance.AppCompat.Body1"
+        android:layout_toRightOf="@+id/author"
+        android:layout_toEndOf="@+id/author"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/favorite"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:src="@mipmap/collection"
+        android:layout_margin="@dimen/dp_10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/favorite" />
+</RelativeLayout>

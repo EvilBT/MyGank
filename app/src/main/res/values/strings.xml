@@ -11,4 +11,6 @@
     <string name="web">前端</string>
     <string name="extension">扩展阅读</string>
 
+    <string name="favorite">点赞</string>
+    <string name="title_activity_webview">WebviewActivity</string>
 </resources>

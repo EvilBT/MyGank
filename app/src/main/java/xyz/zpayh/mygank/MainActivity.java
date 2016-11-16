@@ -7,7 +7,11 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 
+import com.google.android.agera.Updatable;
+
+import xyz.zpayh.bus.AgeraBus;
 import xyz.zpayh.ganknet.api.API;
+import xyz.zpayh.ganknet.data.GankData;
 import xyz.zpayh.imageloader.ImageLoader;
 import xyz.zpayh.library.LibUtils;
 import xyz.zpayh.mygank.android.AndroidFragment;
@@ -15,8 +19,9 @@ import xyz.zpayh.mygank.extension.ExtensionFragment;
 import xyz.zpayh.mygank.girl.GirlFragment;
 import xyz.zpayh.mygank.ios.IOSFragment;
 import xyz.zpayh.mygank.web.WebFragment;
+import xyz.zpayh.mygank.webview.WebViewActivity;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements Updatable{
 
     private BottomNavigationView mBottomNavigationView;
 
@@ -34,8 +39,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initView(@Nullable Bundle savedInstanceState) {
         ImageLoader.initFresco(this, LibUtils.getOkHttpClient());
-        //DaggerUtil.initDataRepositoryComponent();
-
         Toolbar toolbar = findView(R.id.toolbar);
         setSupportActionBar(toolbar);
         mBottomNavigationView = findView(R.id.bottom_nav);
@@ -123,5 +126,27 @@ public class MainActivity extends BaseActivity {
         transaction.hide(miOSFragment);
         transaction.hide(mWebFragment);
         transaction.hide(mExtensionFragment);
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        AgeraBus.getDefault()
+                .addUpdatable(this, GankData.class);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        AgeraBus.getDefault()
+                .removeUpdatable(this, GankData.class);
+    }
+
+    @Override
+    public void update() {
+        AgeraBus.getDefault().getSupplier(GankData.class)
+                .get().ifSucceededSendTo(value ->
+            WebViewActivity.start(this,value.getUrl(),value.getDesc()));
     }
 }

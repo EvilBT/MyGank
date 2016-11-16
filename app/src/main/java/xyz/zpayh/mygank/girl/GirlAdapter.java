@@ -28,41 +28,7 @@ public class GirlAdapter extends BaseQuickAdapter<GankData,BaseViewHolder>{
     @Override
     protected void convert(BaseViewHolder helper, GankData item) {
         FrescoUtil.setWrapAndResizeImage(helper.getView(R.id.sd_image),item.getUrl(),mViewWidth);
+        helper.setText(R.id.author,item.getWho())
+                .setText(R.id.time,item.getDesc());
     }
-    /*private final List<GankData> mList;
-
-    public GirlAdapter() {
-        mList = new ArrayList<>();
-    }
-
-    public void setList(List<GankData> list) {
-        mList.clear();
-        mList.addAll(list);
-        notifyDataSetChanged();
-    }
-
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_girl,parent,false));
-    }
-
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        final GankData data = mList.get(position);
-        FrescoUtil.setWrapImage(holder.mImage,data.getUrl());
-    }
-
-    @Override
-    public int getItemCount() {
-        return mList.size();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        SimpleDraweeView mImage;
-        public ViewHolder(View itemView) {
-            super(itemView);
-            mImage = (SimpleDraweeView) itemView.findViewById(R.id.sd_image);
-        }
-    }*/
 }

@@ -1,4 +1,4 @@
-package xyz.zpayh.mygank.android;
+package xyz.zpayh.mygank.extension;
 
 import android.view.View;
 
@@ -14,7 +14,7 @@ import xyz.zpayh.library.util.TimeUtils;
 import xyz.zpayh.mygank.R;
 
 /**
- * 文 件 名: AndroidAdapter
+ * 文 件 名: ExtensionAdapter
  * 创 建 人: 陈志鹏
  * 创建日期: 2016/11/14 23:15
  * 邮   箱: ch_zh_p@qq.com
@@ -22,12 +22,12 @@ import xyz.zpayh.mygank.R;
  * 修改备注:
  */
 
-public class AndroidAdapter extends BaseQuickAdapter<GankData,BaseViewHolder> {
+public class ExtensionAdapter extends BaseQuickAdapter<GankData,BaseViewHolder> {
 
     private final int mViewWidth;
 
-    public AndroidAdapter(int viewWidth) {
-        super(R.layout.item_android,null);
+    public ExtensionAdapter(int viewWidth) {
+        super(R.layout.item_extension,null);
         this.mViewWidth = viewWidth;
     }
 
