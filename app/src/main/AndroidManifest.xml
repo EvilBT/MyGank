@@ -25,7 +25,12 @@
         <activity
             android:name=".webview.WebViewActivity"
             android:label="@string/title_activity_webview"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:label="@string/title_activity_wxentry"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="true"/>
     </application>
 
 </manifest>

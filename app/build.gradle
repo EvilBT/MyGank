@@ -12,14 +12,36 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
+
+    signingConfigs {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            try {
+                storeFile file("./keystore/release.keystore")
+                storePassword "mygank"
+                keyAlias "sherlock"
+                keyPassword "mygank"
+            } catch (ex) {
+                throw new InvalidUserDataException(ex.toString())
+            }
         }
 
         debug {
+            storeFile file("./keystore/debug.keystore")
+        }
+    }
 
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        }
+
+        debug {
+            debuggable true
+            minifyEnabled false
+            signingConfig signingConfigs.debug
         }
     }
 

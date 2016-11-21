@@ -39,6 +39,7 @@ public class MainActivity extends BaseActivity implements Updatable{
     @Override
     protected void initView(@Nullable Bundle savedInstanceState) {
         ImageLoader.initFresco(this, LibUtils.getOkHttpClient());
+        LibUtils.initAPI(getApplication());
         Toolbar toolbar = findView(R.id.toolbar);
         setSupportActionBar(toolbar);
         mBottomNavigationView = findView(R.id.bottom_nav);

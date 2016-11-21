@@ -17,6 +17,7 @@ import xyz.zpayh.library.LibUtils;
 /**
  * Created by Administrator on 2016/11/14.
  */
+@SuppressWarnings("unused")
 @DefaultLifeCycle(
         application = ".GankApplication",
         flags = ShareConstants.TINKER_ENABLE_ALL
@@ -53,6 +54,5 @@ public class GankApplicationLike extends DefaultApplicationLike{
         DaggerUtil.setApplication(getApplication());
         DaggerUtil.setContext(getApplication());
         DaggerUtil.initDataRepositoryComponent();
-
     }
 }

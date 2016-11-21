@@ -3,13 +3,13 @@ package xyz.zpayh.mygank.webview;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -25,10 +25,17 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
+import com.google.android.agera.Updatable;
+import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
+
+import xyz.zpayh.ageraView.AgeraViews;
+import xyz.zpayh.library.LibUtils;
+import xyz.zpayh.library.util.WXSceneState;
+import xyz.zpayh.library.util.WXUtils;
 import xyz.zpayh.mygank.BaseActivity;
 import xyz.zpayh.mygank.R;
 
-public class WebViewActivity extends BaseActivity {
+public class WebViewActivity extends BaseActivity implements Updatable{
 
     private final static String URL = "url";
     private final static String TITLE = "title";
@@ -36,6 +43,10 @@ public class WebViewActivity extends BaseActivity {
     private WebView mWebView;
 
     private ProgressBar mProgressBar;
+
+    private String mUrl;
+
+    private String mTitle;
 
     @Override
     protected int getLayoutResID() {
@@ -52,13 +63,8 @@ public class WebViewActivity extends BaseActivity {
         }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        AgeraViews.click(fab)
+                .addUpdatable(this);
 
         mProgressBar = findView(R.id.progress);
         mProgressBar.setMax(100);
@@ -151,14 +157,14 @@ public class WebViewActivity extends BaseActivity {
             finish();
             return;
         }
-        final String url = intent.getStringExtra(URL);
-        if (TextUtils.isEmpty(url)){
+        mUrl = intent.getStringExtra(URL);
+        if (TextUtils.isEmpty(mUrl)){
             finish();
             return;
         }
-        mWebView.loadUrl(url);
-        final String title = intent.getStringExtra(TITLE);
-        setTitle(title);
+        mWebView.loadUrl(mUrl);
+        mTitle = intent.getStringExtra(TITLE);
+        setTitle(mTitle);
     }
 
     @Override
@@ -178,6 +184,14 @@ public class WebViewActivity extends BaseActivity {
         }
         finish();
         return true;
+    }
+
+    @Override
+    public void update() {
+        Bitmap thumb = BitmapFactory.decodeResource(getResources(),R.mipmap.logo_28);
+        SendMessageToWX.Req req = WXUtils.createWebReq(mUrl,mTitle,"测试",thumb, WXSceneState.TIME_LINE);
+        LibUtils.getWXApi()
+                .sendReq(req);
     }
 
     public static void start(@NonNull Context context, @NonNull String url, @Nullable String title){
