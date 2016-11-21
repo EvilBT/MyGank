@@ -9,7 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -48,6 +48,16 @@ public class WebViewActivity extends BaseActivity implements Updatable{
 
     private String mTitle;
 
+    private View mShareView;
+
+    private View mShareButton;
+
+    private View mWXSession;
+    private View mWXTimeLine;
+    private View mWXFavorite;
+
+    private BottomSheetBehavior mBehavior;
+
     @Override
     protected int getLayoutResID() {
         return R.layout.act_webview;
@@ -61,10 +71,6 @@ public class WebViewActivity extends BaseActivity implements Updatable{
         if (actionBar != null){
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        AgeraViews.click(fab)
-                .addUpdatable(this);
 
         mProgressBar = findView(R.id.progress);
         mProgressBar.setMax(100);
@@ -143,11 +149,22 @@ public class WebViewActivity extends BaseActivity implements Updatable{
         settings.setBuiltInZoomControls(true);
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
         settings.setLoadWithOverviewMode(true);
+
+        //微信分享
+        mShareButton = findView(R.id.iv_share);
+        mShareView = findView(R.id.share_view);
+        mBehavior = BottomSheetBehavior.from(mShareView);
+        mBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        mWXSession = findView(R.id.wx_session);
+        mWXTimeLine = findView(R.id.wx_time_line);
+        mWXFavorite = findView(R.id.wx_favorite);
     }
 
     @Override
     protected void initListener() {
-
+        AgeraViews.click(mShareButton)
+                .onUpdatesPer(1000)
+                .addUpdatable(this::showBottomSheet);
     }
 
     @Override
@@ -192,6 +209,14 @@ public class WebViewActivity extends BaseActivity implements Updatable{
         SendMessageToWX.Req req = WXUtils.createWebReq(mUrl,mTitle,"测试",thumb, WXSceneState.TIME_LINE);
         LibUtils.getWXApi()
                 .sendReq(req);
+    }
+
+    private void showBottomSheet(){
+        if (mBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN){
+            mBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        }else{
+            mBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        }
     }
 
     public static void start(@NonNull Context context, @NonNull String url, @Nullable String title){

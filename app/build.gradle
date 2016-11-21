@@ -18,7 +18,7 @@ android {
             try {
                 storeFile file("./keystore/release.keystore")
                 storePassword "mygank"
-                keyAlias "sherlock"
+                keyAlias "Sherlock"
                 keyPassword "mygank"
             } catch (ex) {
                 throw new InvalidUserDataException(ex.toString())
@@ -95,8 +95,7 @@ dependencies {
 }
 
 def gitSha() {
-    return "1.0"
-    /*try {
+    try {
         String gitRev = 'git rev-parse --short HEAD'.execute(null, project.rootDir).text.trim()
         if (gitRev == null) {
             throw new GradleException("can't get git rev, you should add git to system path or just input test value, such as 'testTinkerId'")
@@ -104,7 +103,7 @@ def gitSha() {
         return gitRev
     } catch (Exception e) {
         throw new GradleException("can't get git rev, you should add git to system path or just input test value, such as 'testTinkerId'")
-    }*/
+    }
 }
 
 def bakPath = file("${buildDir}/bakApk/")
