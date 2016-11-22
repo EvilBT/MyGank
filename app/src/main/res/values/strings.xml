@@ -14,4 +14,9 @@
     <string name="favorite">点赞</string>
     <string name="title_activity_webview">WebviewActivity</string>
     <string name="title_activity_wxentry">WXEntryActivity</string>
+    <string name="wx_seesion">微信好友</string>
+    <string name="wx_time_line">微信朋友圈</string>
+    <string name="wx_favorite">微信收藏</string>
+    <string name="share_page">分享文章</string>
+    <string name="cancel">取消</string>
 </resources>

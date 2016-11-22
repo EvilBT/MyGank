@@ -7,4 +7,5 @@
     <color name="itemIconHint">#FFFFFF</color>
     <color name="itemTextHint">#FFFFFF</color>
 
+    <color name="share_bg">#30FFFF</color>
 </resources>

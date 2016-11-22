@@ -25,7 +25,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
-import com.google.android.agera.Updatable;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 
 import xyz.zpayh.ageraView.AgeraViews;
@@ -35,7 +34,7 @@ import xyz.zpayh.library.util.WXUtils;
 import xyz.zpayh.mygank.BaseActivity;
 import xyz.zpayh.mygank.R;
 
-public class WebViewActivity extends BaseActivity implements Updatable{
+public class WebViewActivity extends BaseActivity{
 
     private final static String URL = "url";
     private final static String TITLE = "title";
@@ -48,6 +47,8 @@ public class WebViewActivity extends BaseActivity implements Updatable{
 
     private String mTitle;
 
+    private String mDesc;
+
     private View mShareView;
 
     private View mShareButton;
@@ -55,6 +56,8 @@ public class WebViewActivity extends BaseActivity implements Updatable{
     private View mWXSession;
     private View mWXTimeLine;
     private View mWXFavorite;
+
+    private View mCancelShare;
 
     private BottomSheetBehavior mBehavior;
 
@@ -158,17 +161,29 @@ public class WebViewActivity extends BaseActivity implements Updatable{
         mWXSession = findView(R.id.wx_session);
         mWXTimeLine = findView(R.id.wx_time_line);
         mWXFavorite = findView(R.id.wx_favorite);
+        mCancelShare = findView(R.id.tv_cancel);
     }
 
     @Override
     protected void initListener() {
         AgeraViews.click(mShareButton)
-                .onUpdatesPer(1000)
                 .addUpdatable(this::showBottomSheet);
+        AgeraViews.click(mCancelShare)
+                .addUpdatable(this::showBottomSheet);
+        AgeraViews.click(mWXSession)
+                .onUpdatesPer(300)
+                .addUpdatable(this::shareToSession);
+        AgeraViews.click(mWXTimeLine)
+                .onUpdatesPer(300)
+                .addUpdatable(this::shareToTimeLine);
+        AgeraViews.click(mWXFavorite)
+                .onUpdatesPer(300)
+                .addUpdatable(this::shareToFavorite);
     }
 
     @Override
     protected void initData() {
+
         Intent intent = getIntent();
         if (intent == null){
             finish();
@@ -203,20 +218,33 @@ public class WebViewActivity extends BaseActivity implements Updatable{
         return true;
     }
 
-    @Override
-    public void update() {
-        Bitmap thumb = BitmapFactory.decodeResource(getResources(),R.mipmap.logo_28);
-        SendMessageToWX.Req req = WXUtils.createWebReq(mUrl,mTitle,"测试",thumb, WXSceneState.TIME_LINE);
-        LibUtils.getWXApi()
-                .sendReq(req);
-    }
-
     private void showBottomSheet(){
         if (mBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN){
             mBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         }else{
             mBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         }
+    }
+
+    private void shareToSession(){
+        Bitmap thumb = BitmapFactory.decodeResource(getResources(),R.mipmap.logo_108);
+        SendMessageToWX.Req req = WXUtils.createWebReq(mUrl,mTitle,mTitle,thumb, WXSceneState.SESSION);
+        LibUtils.getWXApi()
+                .sendReq(req);
+    }
+
+    private void shareToTimeLine(){
+        Bitmap thumb = BitmapFactory.decodeResource(getResources(),R.mipmap.logo_108);
+        SendMessageToWX.Req req = WXUtils.createWebReq(mUrl,mTitle,mTitle,thumb, WXSceneState.TIME_LINE);
+        LibUtils.getWXApi()
+                .sendReq(req);
+    }
+
+    private void shareToFavorite(){
+        Bitmap thumb = BitmapFactory.decodeResource(getResources(),R.mipmap.logo_108);
+        SendMessageToWX.Req req = WXUtils.createWebReq(mUrl,mTitle,mTitle,thumb, WXSceneState.FAVORITE);
+        LibUtils.getWXApi()
+                .sendReq(req);
     }
 
     public static void start(@NonNull Context context, @NonNull String url, @Nullable String title){

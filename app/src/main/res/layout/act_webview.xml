@@ -44,7 +44,18 @@
         app:elevation="@dimen/dp_4"
         app:layout_behavior="@string/bottom_sheet_behavior">
 
+        <TextView
+            android:id="@+id/share_title"
+            android:text="@string/share_page"
+            android:layout_centerHorizontal="true"
+            style="@style/Base.TextAppearance.AppCompat.Body2"
+            android:layout_margin="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <LinearLayout
+            android:layout_below="@+id/share_title"
+            android:id="@+id/share_content"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,7 +75,7 @@
                     android:layout_centerHorizontal="true"
                     android:id="@+id/tv_session"
                     android:layout_below="@+id/sd_wx_session"
-                    tools:text="微信好友"
+                    android:text="@string/wx_seesion"
                     style="@style/Base.TextAppearance.AppCompat.Body2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -86,7 +97,7 @@
                     android:layout_centerHorizontal="true"
                     android:id="@+id/tv_time_line"
                     android:layout_below="@+id/sd_wx_time_line"
-                    tools:text="微信朋友圈"
+                    android:text="@string/wx_time_line"
                     style="@style/Base.TextAppearance.AppCompat.Body2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -108,12 +119,20 @@
                     android:layout_centerHorizontal="true"
                     android:id="@+id/tv_favorite"
                     android:layout_below="@+id/sd_wx_favorite"
-                    tools:text="微信收藏"
+                    android:text="@string/wx_favorite"
                     style="@style/Base.TextAppearance.AppCompat.Body2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </RelativeLayout>
         </LinearLayout>
-
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_below="@+id/share_content"
+            android:text="@string/cancel"
+            style="@style/Base.TextAppearance.AppCompat.Medium"
+            android:gravity="center"
+            android:padding="@dimen/dp_14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
